@@ -12,7 +12,7 @@ const userSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "userPosts",
     },
-    desc: {
+    description: {
         type: String, default: ""
     },
     profilePic: {
