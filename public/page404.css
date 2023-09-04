@@ -1,0 +1,17 @@
+body {
+    text-align: center;
+    font-family: sans-serif;
+}
+
+.errorDiv {
+    background: rgb(156, 31, 31);
+    border: black 2px solid;
+    width: 60%;
+    min-height: 200px;
+    margin: 50px auto;
+    font-weight: bold;
+}
+
+.errorDiv p {
+    font-size: 1.2em;
+}

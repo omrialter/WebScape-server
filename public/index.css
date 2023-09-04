@@ -1,0 +1,38 @@
+body {
+    background: silver;
+    font-family: sans-serif;
+}
+
+header {
+    background: rgb(133, 127, 127);
+    padding: 24px;
+}
+
+p {
+    font-size: 1.5em;
+}
+
+table {
+    background: rgb(94, 90, 182);
+}
+
+li {
+    margin: 4px;
+}
+
+h2 {
+    text-align: center;
+    margin-top: 10px;
+    padding: 4px
+}
+
+.schema {
+    font-size: 1.2em;
+    border: black 2px solid;
+    width: 50%;
+    margin: 0 auto;
+}
+
+footer {
+    background: rgb(133, 127, 127);
+}
