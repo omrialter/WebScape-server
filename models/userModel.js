@@ -8,16 +8,16 @@ const userSchema = new mongoose.Schema({
     email: String,
     password: String,
     user_name: String,
-    userPosts: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "userPosts",
-    },
     description: {
         type: String, default: ""
     },
     profilePic: {
         type: String, default: ""
     },
+    userPosts: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "userPosts",
+    }],
     followers: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: "users", // Referring to the same User model
