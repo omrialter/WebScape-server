@@ -36,7 +36,7 @@ router.get("/userInfo", auth, async (req, res) => {
   }
 })
 
-router.get("/otherUserInfo:user_name", auth, async (req, res) => {
+router.get("/otherUserInfo/:user_name", auth, async (req, res) => {
   try {
     let username = req.params.user_name;
     let user = await UserModel.findOne({ user_name: username }, { password: 0 }).
