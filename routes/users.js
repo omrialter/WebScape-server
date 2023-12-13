@@ -180,6 +180,7 @@ router.post("/", async (req, res) => {
   try {
     let user = new UserModel(req.body);
     user.password = await bcrypt.hash(user.password, 10);
+    user.profilePic = "https://www.pexels.com/photo/man-facing-sideways-428364/";
     await user.save();
     user.password = "******";
     res.json(user);
