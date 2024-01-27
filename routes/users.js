@@ -267,7 +267,6 @@ router.put("/follow/:id", auth, async (req, res) => {
 
 
 
-
 //change user role
 //Domain/users/changeRole/(id of the user)/admin\user
 router.patch("/changeRole/:id/:role", authAdmin, async (req, res) => {
