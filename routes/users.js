@@ -36,6 +36,22 @@ router.get("/userInfo", auth, async (req, res) => {
   }
 })
 
+router.get("/otherUserInfo/:user_name", auth, async (req, res) => {
+  try {
+    let username = req.params.user_name;
+    let user = await UserModel.findOne({ user_name: username }, { password: 0 }).
+      populate(`userPosts`)
+      .exec()
+    res.json(user)
+  }
+  catch (err) {
+    console.log(err);
+    res.status(502).json({ err })
+  }
+})
+
+
+
 router.get("/random4", auth, async (req, res) => {
   try {
     const user = await UserModel.findById(req.tokenData._id);
@@ -164,6 +180,7 @@ router.post("/", async (req, res) => {
   try {
     let user = new UserModel(req.body);
     user.password = await bcrypt.hash(user.password, 10);
+    user.profilePic = "https://www.pexels.com/photo/man-facing-sideways-428364/";
     await user.save();
     user.password = "******";
     res.json(user);
@@ -195,7 +212,7 @@ router.post("/login", async (req, res) => {
   }
 
   let newToken = createToken(user._id, user.role, user.followings, user.email, user.user_name)
-  res.json({ token: newToken });
+  res.json({ token: newToken, expDate: Date.now() + 36000000 });
 
 })
 
@@ -246,7 +263,6 @@ router.put("/follow/:id", auth, async (req, res) => {
   }
 }
 )
-
 
 
 

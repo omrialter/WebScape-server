@@ -10,7 +10,7 @@ router.get("/", async (req, res) => {
 
 // get all the comments in a post
 // Domain/comments/(id of the post)
-router.get("/:post_id", async (req, res) => {
+router.get("/showComments/:post_id", async (req, res) => {
     let perPage = 5;
     let page = req.query.page - 1 || 0;
 
@@ -30,7 +30,7 @@ router.get("/:post_id", async (req, res) => {
     }
 });
 
-router.get("/get/commentsList", authAdmin, async (req, res) => {
+router.get("/commentsList", authAdmin, async (req, res) => {
     let perPage = 10;
     let page = req.query.page - 1 || 0;
     let sort = req.query.sort || "date_created";
@@ -52,7 +52,7 @@ router.get("/get/commentsList", authAdmin, async (req, res) => {
 });
 
 
-router.get("/search/search", async (req, res) => {
+router.get("/search", async (req, res) => {
     let s = req.query.s;
     let searchExp = new RegExp(s, "i");
     try {
@@ -69,7 +69,7 @@ router.get("/search/search", async (req, res) => {
     }
 })
 
-router.get("/count/count", async (req, res) => {
+router.get("/count", async (req, res) => {
     try {
         let perPage = req.query.perPage || 10;
         const count = await CommentModel.countDocuments({});
@@ -83,8 +83,8 @@ router.get("/count/count", async (req, res) => {
 })
 
 // post a new comment
-//  Domain/comments/(id of the post you commenting)
-router.post("/:id", auth, async (req, res) => {
+
+router.post("/postAComment/:id", auth, async (req, res) => {
     let validBody = validateComments(req.body);
     if (validBody.error) {
         return res.status(400).json(validBody.error.details)
@@ -128,29 +128,11 @@ router.put("/:id", auth, async (req, res) => {
     }
 })
 
-//delete comment
-// Domain/comments/(id of the coment)
-// router.delete("/:id", auth, async (req, res) => {
-//     try {
-//         let id = req.params.id;
-//         let data;
-//         if (req.tokenData.role == "admin") {
-//             data = await CommentModel.deleteOne({ _id: id });
-//         }
-//         else {
-//             data = await CommentModel.deleteOne({ _id: id, user: req.tokenData._id });
-//         }
-//         res.json(data);
-//     }
-//     catch (err) {
-//         console.log(err);
-//         res.status(502).json({ err })
-//     }
-// })
+
 
 //delete comment
 // Domain/comments/(id of the coment)
-router.delete("/:id", auth, async (req, res) => {
+router.delete("/delete/:id", auth, async (req, res) => {
     try {
         let id = req.params.id;
         let user_id = req.params.user;

@@ -8,16 +8,16 @@ const userSchema = new mongoose.Schema({
     email: String,
     password: String,
     user_name: String,
-    userPosts: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "userPosts",
-    },
     description: {
         type: String, default: ""
     },
     profilePic: {
         type: String, default: ""
     },
+    userPosts: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "userPosts",
+    }],
     followers: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: "users", // Referring to the same User model
@@ -79,10 +79,7 @@ exports.validateUpdate = (_reqBody) => {
         password: Joi.forbidden(),
         name: Joi.string().min(2).max(200).allow(null, ""),
         profilePic: Joi.string().min(3).max(999).allow(null, ""),
-        coverPic: Joi.string().min(3).max(999).allow(null, ""),
-        gender: Joi.string().min(1).max(10).allow(null, ""),
-        desc: Joi.string().min(1).max(80).allow(null, ""),
-        city: Joi.string().min(1).max(50).allow(null, ""),
+        description: Joi.string().min(1).max(80).allow(null, ""),
         user_name: Joi.string().min(1).max(16).allow(null, ""),
     })
     return joiSchema.validate(_reqBody)
