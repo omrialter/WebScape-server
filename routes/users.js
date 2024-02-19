@@ -212,7 +212,7 @@ router.post("/login", async (req, res) => {
   }
 
   let newToken = createToken(user._id, user.role, user.followings, user.email, user.user_name)
-  res.json({ token: newToken });
+  res.json({ token: newToken, expDate: Date.now() + 36000000 });
 
 })
 
